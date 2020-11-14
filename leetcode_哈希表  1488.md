@@ -60,7 +60,7 @@
     1 <= rains.length <= 10^5
     0 <= rains[i] <= 10^9
 
-[链接] https://leetcode-cn.com/problems/avoid-flood-in-the-city/
+链接:https://leetcode-cn.com/problems/avoid-flood-in-the-city/
 
 Code:
 ```cpp
