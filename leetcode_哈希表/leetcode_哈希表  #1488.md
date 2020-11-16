@@ -1,6 +1,7 @@
-1488. 避免洪水泛滥
+1488. 避免洪水泛滥   //中等
 ----
     你的国家有无数个湖泊，所有湖泊一开始都是空的。当第 n 个湖泊下雨的时候，如果第 n 个湖泊是空的，那么它就会装满水，否则这个湖泊会发生洪水。你的目标是避免任意一个湖泊发生洪水。
+    
     给你一个整数数组 rains ，其中：
     rains[i] > 0 表示第 i 天时，第 rains[i] 个湖泊会下雨。
     rains[i] == 0 表示第 i 天没有湖泊会下雨，你可以选择 一个 湖泊并 抽干 这个湖泊的水。
@@ -70,22 +71,30 @@ public:
     {
         unordered_map<int,int> water;
         set<int> zero;
-        vector<int> res(rains.size(),1);
+        vector<int> res(rains.size(),1);   //先初始大小,且“其中 1 <= x,y <= 10^9”
         for(int i=0;i<rains.size();i++)
         {
             int tar=rains[i];
-            if(tar==0) { zero.insert(i); continue; }
-            if(water.count(tar)!=0)
+            if( tar==0 ) { zero.insert(i); continue; }
+            if( water.count(tar) )
             {
-                auto it=zero.lower_bound(water[tar]);
-                if(it==zero.end()) { return {}; break; }
+                auto it=zero.lower_bound( water[tar] );
+                if( it==zero.end() ) { return {}; break; }
                 res[*it]=tar;
                 zero.erase(it);
             }
-            water[tar]=i; 
+            water[tar]=i;
             res[i]=-1;
         }
         return res;
     }
 };
 ```
+#####
+思路分析
+* 遍历过程中考虑三种情况 1.遍历到空闲的0 2.遍历到的非空闲且是第一次 3.遍历到的非空闲且但不止第一次
+#####
+用时
+* 执行用时：760 ms , 在所有 C++ 提交中击败了40.09%的用户
+* 内存消耗：107.7 MB , 在所有 C++ 提交中击败了33.05%的用户
+* 2020/11/16   23:19
