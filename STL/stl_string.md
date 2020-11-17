@@ -7,10 +7,12 @@ string s;
 
 ####
     
-    s.substr(i,j);                  左闭右闭,s的子串，返回string类
+    s.substr(pos, n);               需要两个参数，第一个是开始位置，第二个是获取子串的长度。
     s.find(value);                  查找某串是否在s中，若无则返回s.end()
     s=s+" ";                        串的连接
     s.erase( res.end()-1 );         去除最后串的最后一个字母
+    
+    string a = s.substr(0,5);       获得字符串s中从第0位开始的长度为5的字符串
     
     stringstream ss(sentence);
     string temp;
