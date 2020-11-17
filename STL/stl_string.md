@@ -11,6 +11,7 @@ string s;
     s.find(value);                  查找某串是否在s中，若无则返回s.end()
     s=s+" ";                        串的连接
     s.erase( res.end()-1 );         去除最后串的最后一个字母
+    s.pop_back();                   去除最后串的最后一个char
     
     string a = s.substr(0,5);       获得字符串s中从第0位开始的长度为5的字符串
     
