@@ -22,8 +22,8 @@ Code:
 ```cpp
 class Trie 
 {
-    Trie *child[26];
     bool isWord;
+    Trie *child[26];
 public:
     /** Initialize your data structure here. */
     Trie() 
