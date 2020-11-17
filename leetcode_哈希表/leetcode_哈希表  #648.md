@@ -1,36 +1,39 @@
-题目
---
-    648. 单词替换
-    在英语中，我们有一个叫做 词根(root)的概念，它可以跟着其他一些词组成另一个较长的单词——我们称这个词为 继承词(successor)。例如，词根an，跟随着单词 other(其他)，可以形成新的单词 another(另一个)。
+ 648. 单词替换   //中等
+------
+    
+    在英语中，我们有一个叫做 词根(root)的概念，它可以跟着其他一些词组成另一个较长的单词——我们称这个词为 继承词(successor)。
+    
+    例如，词根an，跟随着单词 other(其他)，可以形成新的单词 another(另一个)。
 
     现在，给定一个由许多词根组成的词典和一个句子。你需要将句子中的所有继承词用词根替换掉。如果继承词有许多可以形成它的词根，则用最短的词根替换它。
 
     你需要输出替换之后的句子。
 
- 
-
     示例 1：
 
     输入：dictionary = ["cat","bat","rat"], sentence = "the cattle was rattled by the battery"
     输出："the cat was rat by the bat"
+    
     示例 2：
 
     输入：dictionary = ["a","b","c"], sentence = "aadsfasf absbs bbab cadsfafs"
     输出："a a b c"
+    
     示例 3：
 
     输入：dictionary = ["a", "aa", "aaa", "aaaa"], sentence = "a aa a aaaa aaa aaa aaa aaaaaa bbb baba ababa"
     输出："a a a a a a a a bbb baba a"
+    
     示例 4：
 
     输入：dictionary = ["catt","cat","bat","rat"], sentence = "the cattle was rattled by the battery"
     输出："the cat was rat by the bat"
+    
     示例 5：
 
     输入：dictionary = ["ac","ab"], sentence = "it is abnormal that this solution is accepted"
     输出："it is ab that this solution is ac"
  
-
     提示：
 
     1 <= dictionary.length <= 1000
@@ -45,34 +48,39 @@
 
 链接:https://leetcode-cn.com/problems/replace-words/
 
-
-Code：
+Code:
 ```cpp
 class Solution 
 {
 public:
     string replaceWords(vector<string>& dictionary, string sentence) 
     {
-        unordered_map<string,int> mp;
-        for(auto d:dictionary)
-        {
-            mp[d]++;
-        }
+        set<string> s;
+        for(auto &c:dictionary) s.insert(c);
         string res;
-        istringstream words(sentence);string s;
-        while(words>>s)
+        stringstream ss(sentence);
+        string temp;
+        while(ss>>temp)
         {
-            string temp="";
-            for(int i=0;i<s.size();i++)
+            for(int i=0;i<temp.size();i++)
             {
-                temp+=s[i];
-                if(mp[temp]) break;
+                if( s.find(temp.substr(0,i))!=s.end() )
+                {
+                    temp=temp.substr(0,i);
+                }
             }
-            res+=temp;res+=" ";
+            res+=temp+" ";
         }
-        string resres;
-        for(int i=0;i<res.size()-1;i++) resres+=res[i];
-        return resres;
+        res.erase( res.end()-1 );
+        return res;
     }
 };
 ```
+#####
+思路分析
+* 哈希解法，先用set存词根，再通过stringstream去除空格读取sentence中的单词
+#####
+用时
+* 执行用时：684 ms, 在所有 C++ 提交中击败了19.38%的用户
+* 内存消耗：273.2 MB, 在所有 C++ 提交中击败了21.47%的用户
+* 2020/11/17 17:18
