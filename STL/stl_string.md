@@ -7,7 +7,7 @@ string s;
 
 ####
     
-    s.substr(i,j);                  左闭右闭,s的子串
+    s.substr(i,j);                  左闭右闭,s的子串，返回string类
     s.find(value);                  查找某串是否在s中，若无则返回s.end()
     s=s+" ";                        串的连接
     s.erase( res.end()-1 );         去除最后串的最后一个字母
